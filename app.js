@@ -20,3 +20,23 @@ const server = app.listen(port, () => {
 });
 
 //socket io chat app stuff to follow
+io.attach(server);
+
+io.on('connection', function(socket) {
+    console.log('a user has connected');
+    socket.emit('connected', {sID: `${socket.id}`, message: 'new connection'} );
+
+    // listen for incoming messages, and then send em
+    socket.on('chat message', function(msg) {
+        //check the message contents
+        console.log('message', msg, 'socket', socket.id);
+
+        //send message to every connected client
+        io.emit('chat message', { id: `${socket.id}`, message: msg});
+    })
+
+
+    socket.on('disconnect', function() {
+        console.log('a user has disconnected');
+    });
+});
