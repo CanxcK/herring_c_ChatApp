@@ -5,12 +5,12 @@ const socket=io();
 
 function setUserId({sID, message}) {
     //debugger;
-    console.log('connected'. sID, message);
+    console.log('connected', sID, message);
     vm.socketID = sID;
 }
 
 function appendMessage(message) {
-    vm.messages.pish(message);
+    vm.messages.push(message);
 }
 
 

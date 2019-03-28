@@ -7,7 +7,7 @@ const io = require('socket.io')();
 const port = process.env.PORT || 3000;
 
 // tell our pp to sue the public folder
-app.unsubscribe(express.static('public'));
+app.use(express.static('public'));
 
 // insta the only route we need
 app.get('/', (req, res, next) => {

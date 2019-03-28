@@ -10,7 +10,7 @@ export default {
 
     data: function() {
         return {
-            matchedID : this.$parent.socketId == this.msg.id
+            matchedID : this.$parent.socketID == this.msg.id
         }
     }
 }
