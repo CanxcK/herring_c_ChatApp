@@ -16,10 +16,17 @@ function appendMessage(message) {
 
 const vm = new Vue({
     data: {
+        connectedUsers: [],
         socketID: "",
         nickname: "",
         message: "",
         messages: []
+    },
+
+    created: function () {
+        socket.on('user joined', function (socketId) {
+            this.connectedUsers.push(socketId);
+        }.bind(this));
     },
 
     methods: {

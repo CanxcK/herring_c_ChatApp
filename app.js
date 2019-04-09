@@ -35,8 +35,11 @@ io.on('connection', function(socket) {
         io.emit('chat message', { id: `${socket.id}`, message: msg});
     })
 
+    io.emit('user joined', socket.id)
+
 
     socket.on('disconnect', function() {
         console.log('a user has disconnected');
+        socket.emit('hello', 'can you hear me?', 1, 2, 'abc');
     });
 });
