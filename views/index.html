@@ -13,16 +13,14 @@
 			<div class="panel-heading">
 			<span class="glyphicon glyphicon-user"></span> Online ({{ connectedUsers.length }})
 			</div>
-			<ul>
-				<li v-for="user in connectedUsers">{{ user }}</li>
-			</ul>
 			<br>
+			<span class="" v-if="userIsTyping">is typing....</span>
 			<label for="nickname">Your Nickname (optional)</label>
 			<input v-model="nickname" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
 			
 			<form>
 				<label for="message">Something to say?</label>
-				<textarea v-model="message" class="message" type="text" autocomplete="off" id="textarea"></textarea>
+				<textarea v-model="message" class="message" type="text" autocomplete="off" id="textarea" v-on:keyup="usersAreTyping" v-on:keyup.13="stoppedTyping('13')" v-on:keyup.8="stoppedTyping('8')"></textarea>
 				<input type="submit" @click.prevent="dispatchMessage">
 			</form>
 		</section>

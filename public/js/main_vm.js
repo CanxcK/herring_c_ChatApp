@@ -35,6 +35,31 @@ const vm = new Vue({
             socket.emit('chat message', { content: this.message, name: this.nickname || "Anonymous"} );
             this.message = "";
 
+        },
+
+        userIsTyping: function (nickname) {
+            if(this.areTyping.indexOf(nickname) >= 0) {
+                return true;
+            }
+
+            return false;
+
+        },
+         
+        usersAreTyping: function () {
+            if(this.areTyping.indexOf(socket.id) <= -1) {
+                this.areTyping.push(socket.id);
+                socket.emit('user is typing', socket.id);
+            }
+        },
+
+        stoppedTyping: function (keycode) {
+            if (keycode == '13') {
+                var index = this.areTyping.indexOf(socket.id);
+                if (index >= 0) {
+                    this.areTyping.splice(index,1);
+                }
+            }
         }
     },
 
